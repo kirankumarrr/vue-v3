@@ -16,37 +16,19 @@
 
 
 <script setup>
-import { reactive, ref, onMounted, nextTick } from "vue";
+import { ref, onMounted } from "vue";
+
+import { useCounter } from "../use/useCounter";
 
 const nonReactiveTitle = ' My Non reactive Title'
 
-const counter = ref(0);
 const counterTitle = ref("My Counter");
 
-// Reactive Object 
 
-const counterData = reactive({
-  count: 0,
-  title: 'My Counter'
-})
-
-const decrement = () => {
-  counter.value--;
-  // Reactive object update
-  counterData.count--;
-};
-const increment = async () => {
-  counter.value++;
-  // Reactive object update
-  counterData.count++;
-  await nextTick()
-  console.log('Updated Dom after incremented')
-  // without async
-  // nextTick(()=>{
-  //    console.log('Updated Dom after incremented')
-  // })
-};
-
+/***
+ * Counter 
+ */
+const { counterData, decrement, increment } = useCounter()
 // Template Ref 
 const appTitleRef = ref(null)
 onMounted(() => {
@@ -55,65 +37,18 @@ onMounted(() => {
 })
 </script>
 
-<!--  this is before v3.2 -> without setup 
-<script>
-import { ref } from "vue";
 
-export default {
-  setup() {
-    const counter = ref(0);
-
-    const decrement = () => {
-      counter.value--;
-    };
-    const increment = () => {
-      counter.value++;
-    };
-
-    return {
-      counter,
-      decrement,
-      increment,
-    };
-  },
-};
-</script>
- -->
-
-
-<!--
-  this is optional api
- <script>
- export default {
-   data() {
-     return {
-       counter: 0,
-     };
-   },
-   methods: {
-     decrement() {
-       this.counter--;
-     },
-     increment() {
-       this.counter++;
-     },
-   },
- };
-
-</script>
- -->
-
-<style>
-.home {
+<style>.home {
   text-align: center;
   padding: 20px;
 }
+
 .btn,
 .counter {
   font-size: 40px;
   margin: 10px;
 }
+
 .edit {
   margin-top: 40px;
-}
-</style>
+}</style>

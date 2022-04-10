@@ -11,12 +11,19 @@ import { RouterLink } from 'vue-router';
     </ul>
 
     <textarea rows="1" cols="40" />
+
+    <div>
+      <button class="counter-button" @click="increment" :class="{ 'bg-yellow': !isEven }">{{
+        counterData.count
+      }}</button>
+    </div>
   </div>
 </template>
 
 
 <script setup>
 import { ref } from 'vue';
+import { useCounter } from "../use/useCounter";
 const posts = ref([
   {
     id: 'id1',
@@ -32,10 +39,14 @@ const posts = ref([
   }
 ])
 
+/***
+ * Counter 
+ */
+const { counterData, increment, isEven } = useCounter()
+
 </script>
 
-<style >
-@media (min-width: 1024px) {
+<style >@media (min-width: 1024px) {
   .post {
     min-height: 100vh;
     display: flex;
@@ -45,5 +56,16 @@ const posts = ref([
   .list {
     margin-bottom: 30px;
   }
+
 }
-</style>
+
+.counter-button {
+  font-size: 40px;
+  width: 100%;
+  margin-top: 20px;
+  background-color: rgb(11, 164, 80);
+}
+
+.bg-yellow {
+  background-color: yellow;
+}</style>

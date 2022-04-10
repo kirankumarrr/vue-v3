@@ -1,5 +1,9 @@
 <template>
-  <div class="user-data">{{ userData.name }} && {{ userData.username }}</div>
+  <div class="user-data">{{ userData.name }} && {{ userData.username }} |
+    Network Status : <span :style="{
+      color: isOnline ? 'green' : 'red'
+    }"> {{ isOnline ? 'Online' : 'Offline' }}</span>
+  </div>
   <header>
     <div class="wrapper">
       <nav>
@@ -20,6 +24,10 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import { reactive, provide } from 'vue';
+import { useOnline } from '@vueuse/core'
+
+const isOnline = useOnline();
+
 const userData = reactive({
   name: 'tester',
   username: 'tester-username'
@@ -31,8 +39,7 @@ provide('userData', userData)
 
 
 
-<style>
-@import "@/assets/base.css";
+<style>@import "@/assets/base.css";
 
 #app {
   max-width: 1280px;
@@ -88,5 +95,4 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
-}
-</style>
+}</style>
