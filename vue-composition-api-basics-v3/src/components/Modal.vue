@@ -10,6 +10,7 @@
             <!-- <button @click="$emit('hideModal')">Hide Modal</button> -->
             <button @click="$emit('update:modelValue', false)">Hide Modal</button>
             <!-- <button @click="handleBtnClick">Hide Modal</button> -->
+            <div class="user-data">{{ userData.name }} && {{ userData.username }}</div>
         </div>
     </teleport>
 </template>
@@ -33,6 +34,9 @@ const props = defineProps({
     subTitle: {
         type: String,
         default: 'no subtitle sepecified'
+    },
+    userData: {
+        type: Object
     }
 })
 

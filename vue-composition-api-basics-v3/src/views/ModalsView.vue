@@ -10,6 +10,7 @@
             v-model="showModal"
             subTitle="this is subTitle"
             :is="showDarkModals ? ModalDark : Modal"
+            :userData="userData"
         >
             <template v-slot:title>my new Title</template>
             <p>
@@ -28,6 +29,15 @@
 import { ref } from 'vue'
 import Modal from '../components/Modal.vue'
 import ModalDark from '../components/ModalDark.vue'
+
+/**
+ * Props
+*/
+const props = defineProps({
+    userData: {
+        type: Object
+    }
+})
 
 const showDarkModals = ref(false)
 

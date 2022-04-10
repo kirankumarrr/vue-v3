@@ -1,8 +1,5 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
-
 <template>
+  <div class="user-data">{{ userData.name }} && {{ userData.username }}</div>
   <header>
     <div class="wrapper">
       <nav>
@@ -15,8 +12,21 @@ import { RouterLink, RouterView } from "vue-router";
   </header>
 
   <!-- this allow us to display views -->
-  <RouterView />
+  <RouterView :userData="userData" />
 </template>
+
+
+
+<script setup>
+import { RouterLink, RouterView } from "vue-router";
+import { reactive } from 'vue';
+const userData = reactive({
+  name: 'tester',
+  username: 'tester-username'
+})
+</script>
+
+
 
 <style>
 @import "@/assets/base.css";
