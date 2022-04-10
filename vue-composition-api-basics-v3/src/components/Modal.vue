@@ -1,6 +1,6 @@
 <template>
     <teleport to=".modals-container">
-        <div class="modal">
+        <div class="modal" v-if="modelValue">
             <h1>
                 <slot name="title" />
             </h1>
@@ -8,7 +8,8 @@
             <slot />
             <!-- <pre>{{ $slots.title() }}</pre> -->
             <!-- <button @click="$emit('hideModal')">Hide Modal</button> -->
-            <button @click="handleBtnClick">Hide Modal</button>
+            <button @click="$emit('update:modelValue', false)">Hide Modal</button>
+            <!-- <button @click="handleBtnClick">Hide Modal</button> -->
         </div>
     </teleport>
 </template>
@@ -19,11 +20,16 @@ import { useSlots } from 'vue';
 const slots = useSlots()
 console.log('slots', slots.title())
 
+// modelValue : can access showModal ref
 
 /***
  * Props 
  */
 const props = defineProps({
+    modelValue: {
+        type: Boolean,
+        default: false
+    },
     subTitle: {
         type: String,
         default: 'no subtitle sepecified'
@@ -33,12 +39,12 @@ const props = defineProps({
 /***
  * Emits 
  */
-const emit = defineEmits(['hideModal'])
+const emit = defineEmits(['update:modelValue'])
 
 // Programatically
-const handleBtnClick = () => {
-    emit('hideModal')
-}
+// const handleBtnClick = () => {
+//     emit('update:modelValue', false)
+// }
 
 </script>
 

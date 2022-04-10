@@ -2,7 +2,7 @@
     <div class="modals">
         <h1>models</h1>
         <button @click="showModal = true">Show Modal</button>
-        <Modal v-if="showModal" subTitle="this is subTitle" @hideModal="showModal = false">
+        <Modal v-model="showModal" subTitle="this is subTitle">
             <template v-slot:title>my new Title</template>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
