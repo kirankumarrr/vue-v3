@@ -12,18 +12,21 @@
   </header>
 
   <!-- this allow us to display views -->
-  <RouterView :userData="userData" />
+  <RouterView />
 </template>
 
 
 
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-import { reactive } from 'vue';
+import { reactive, provide } from 'vue';
 const userData = reactive({
   name: 'tester',
   username: 'tester-username'
 })
+
+// Passing this data throughout the app child components
+provide('userData', userData)
 </script>
 
 

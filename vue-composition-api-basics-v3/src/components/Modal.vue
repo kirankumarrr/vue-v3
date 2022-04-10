@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { useSlots } from 'vue';
+import { useSlots, inject } from 'vue';
 
 const slots = useSlots()
 console.log('slots', slots.title())
@@ -34,9 +34,6 @@ const props = defineProps({
     subTitle: {
         type: String,
         default: 'no subtitle sepecified'
-    },
-    userData: {
-        type: Object
     }
 })
 
@@ -49,6 +46,11 @@ const emit = defineEmits(['update:modelValue'])
 // const handleBtnClick = () => {
 //     emit('update:modelValue', false)
 // }
+
+/**
+ * inject : access parents data 
+ * */
+const userData = inject('userData')
 
 </script>
 
