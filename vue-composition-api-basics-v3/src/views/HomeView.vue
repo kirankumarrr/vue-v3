@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2>{{ nonReactiveTitle }} :</h2>
+    <h2 ref="appTitleRef">{{ nonReactiveTitle }} :</h2>
     <h3>{{ counterData.title }} :</h3>
     <div>
       <button class="btn" @click="decrement">-</button>
@@ -16,12 +16,13 @@
 
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted, nextTick } from "vue";
 
 const nonReactiveTitle = ' My Non reactive Title'
 
-const counter = ref(0),
-  counterTitle = ref("My Counter");
+const counter = ref(0);
+const counterTitle = ref("My Counter");
+
 // Reactive Object 
 
 const counterData = reactive({
@@ -34,11 +35,24 @@ const decrement = () => {
   // Reactive object update
   counterData.count--;
 };
-const increment = () => {
+const increment = async () => {
   counter.value++;
   // Reactive object update
   counterData.count++;
+  await nextTick()
+  console.log('Updated Dom after incremented')
+  // without async
+  // nextTick(()=>{
+  //    console.log('Updated Dom after incremented')
+  // })
 };
+
+// Template Ref 
+const appTitleRef = ref(null)
+onMounted(() => {
+  //below will give access to h2
+  console.log('appTitleRef.value', appTitleRef.value.offsetWidth)
+})
 </script>
 
 <!--  this is before v3.2 -> without setup 
