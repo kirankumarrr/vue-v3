@@ -13,17 +13,18 @@ import { RouterLink } from 'vue-router';
     <textarea rows="1" cols="40" />
 
     <div>
-      <button class="counter-button" @click="increment" :class="{ 'bg-yellow': !isEven }">{{
-        counterData.count
-      }}</button>
+      <button class="counter-button" @click="counter.increaseCounter()"
+        :class="{ 'bg-yellow': counter.oddOrEven === 'odd' }">{{
+          counter.count
+        }}</button>
     </div>
   </div>
 </template>
 
 
 <script setup>
-import { ref } from 'vue';
-import { useCounter } from "../use/useCounter";
+import { useCounterStore } from '@/stores/counter'
+import { ref, onUpdated } from 'vue';
 const posts = ref([
   {
     id: 'id1',
@@ -42,11 +43,15 @@ const posts = ref([
 /***
  * Counter 
  */
-const { counterData, increment, isEven } = useCounter()
+const counter = useCounterStore()
 
+onUpdated(() => {
+  console.log('PoST view onUpdated')
+})
 </script>
 
-<style >@media (min-width: 1024px) {
+<style >
+@media (min-width: 1024px) {
   .post {
     min-height: 100vh;
     display: flex;
@@ -68,4 +73,5 @@ const { counterData, increment, isEven } = useCounter()
 
 .bg-yellow {
   background-color: yellow;
-}</style>
+}
+</style>

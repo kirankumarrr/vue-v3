@@ -1,44 +1,51 @@
 <template>
   <div class="home">
     <h2 ref="appTitleRef">{{ nonReactiveTitle }} :</h2>
-    <h3>{{ counterData.title }} :</h3>
+    <h3>{{ counter.title }} :</h3>
     <div>
-      <button class="btn" @click="decrement">-</button>
-      <span class="counter">{{ counterData.count }}</span>
-      <button class="btn" @click="increment">+</button>
+      <button class="btn" @click="counter.decreaseCounter(1)">-</button>
+      <span class="counter">{{ counter.count }}</span>
+      <button class="btn" @click="counter.increaseCounter(1)">+</button>
     </div>
+
+    <p>This counter is {{ counter.oddOrEven }}</p>
+
     <div class="edit">
       <h4>Edit Counter Title</h4>
-      <input type="text" v-model="counterData.title" />
+      <input type="text" v-model="counter.title" />
     </div>
   </div>
 </template>
 
 
 <script setup>
-import { ref, onMounted } from "vue";
-
-import { useCounter } from "../use/useCounter";
-
+import { ref, onMounted, onUpdated } from "vue";
+import { useCounterStore } from '@/stores/counter';
 const nonReactiveTitle = ' My Non reactive Title'
 
 const counterTitle = ref("My Counter");
 
-
-/***
- * Counter 
- */
-const { counterData, decrement, increment } = useCounter()
 // Template Ref 
 const appTitleRef = ref(null)
 onMounted(() => {
   //below will give access to h2
   console.log('appTitleRef.value', appTitleRef.value.offsetWidth)
 })
+
+/**
+ * Counter 
+*/
+const counter = useCounterStore()
+
+
+onUpdated(() => {
+  console.log('Home view onUpdated')
+})
 </script>
 
 
-<style>.home {
+<style>
+.home {
   text-align: center;
   padding: 20px;
 }
@@ -51,4 +58,5 @@ onMounted(() => {
 
 .edit {
   margin-top: 40px;
-}</style>
+}
+</style>
