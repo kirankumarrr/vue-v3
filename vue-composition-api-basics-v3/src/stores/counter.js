@@ -10,7 +10,7 @@ export const useCounterStore = defineStore({
     newF2InprogressIncreaseCounter(amount = 1) {
       this.count += amount
     },
-    increaseCounter(amount = 1) {
+    increaseF2Counter(amount = 1) {
       this.count += amount
     },
     decreaseCounter(amount) {
