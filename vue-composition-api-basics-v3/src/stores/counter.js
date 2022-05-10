@@ -7,6 +7,9 @@ export const useCounterStore = defineStore({
     title: 'My Counter Title'
   }),
   actions: {
+    newIncreaseCounter(amount = 1) {
+      this.count += amount
+    },
     increaseCounter(amount = 1) {
       this.count += amount
     },
