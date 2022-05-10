@@ -12,8 +12,9 @@
 
     <div class="edit">
       <h4>Edit Counter Title</h4>
-      <input type="text" v-model="counter.title" />
+      <input type="text" v-model="counter.title" @input="counter.changeTitle" />
     </div>
+    <post-view></post-view>
   </div>
 </template>
 
@@ -21,6 +22,7 @@
 <script setup>
 import { ref, onMounted, onUpdated } from "vue";
 import { useCounterStore } from '@/stores/counter';
+import PostView from "./PostView.vue";
 const nonReactiveTitle = ' My Non reactive Title'
 
 const counterTitle = ref("My Counter");

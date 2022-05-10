@@ -15,6 +15,10 @@ export const useCounterStore = defineStore({
     },
     decreaseCounter(amount) {
       this.count -= amount
+    },
+    changeTitle(e) {
+      console.log('e', e.target.value)
+      this.title = e.target.value
     }
   },
   getters: {
